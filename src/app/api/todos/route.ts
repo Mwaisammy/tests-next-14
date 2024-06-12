@@ -1,36 +1,36 @@
 
-import { redis } from "@/lib/db";
-import { NextResponse } from "next/server";
+// import { redis } from "@/lib/db";
+// import { NextResponse } from "next/server";
 
 
-export async function POST (request: Request){
-    try {
+// export async function POST (request: Request){
+//     try {
 
-        const {todo} = await request.json();
-        const uuid = crypto.randomUUID();
+//         const {todo} = await request.json();
+//         const uuid = crypto.randomUUID();
 
-        const id = `todo-${uuid}`
+//         const id = `todo-${uuid}`
 
-        await redis.set(id,todo);
-        return NextResponse.json(todo)
+//         await redis.set(id,todo);
+//         return NextResponse.json(todo)
       
 
-        // const uuid = crypto.randomUUID();
+//         // const uuid = crypto.randomUUID();
 
 
-        // const key = `todo-${uuid}`
+//         // const key = `todo-${uuid}`
 
-        // const data = await redis.set(key, todo)
-        // return NextResponse.json({data})
+//         // const data = await redis.set(key, todo)
+//         // return NextResponse.json({data})
 
        
 
         
-    } catch (error) {
+//     } catch (error) {
 
-        console.log(error)
+//         console.log(error)
 
-        return new NextResponse('Something went wrong', {status: 500})
+//         return new NextResponse('Something went wrong', {status: 500})
         
-    }
-}
+//     }
+// }
