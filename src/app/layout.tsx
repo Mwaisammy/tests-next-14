@@ -1,10 +1,9 @@
-import Providers from "@/components/providers";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { Toaster } from "sonner";
 import "./globals.css";
-import ModalDialog from "@/components/modal-dialog";
-
+import ModalProvider from "@/components/providers/post-provider";
+import QueryProvider from "@/components/providers/query-provider";
+import { Toaster } from "sonner";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -20,12 +19,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Providers>
+        <QueryProvider>
           <Toaster />
-          <ModalDialog />
+          <ModalProvider />
 
           {children}
-        </Providers>
+        </QueryProvider>
       </body>
     </html>
   );

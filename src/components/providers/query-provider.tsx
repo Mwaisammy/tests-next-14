@@ -1,12 +1,14 @@
 "use client";
-
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import React, { PropsWithChildren } from "react";
+import { PropsWithChildren } from "react";
 
+type Props = {};
 const queryClient = new QueryClient();
 
-export default function Providers({ children }: PropsWithChildren<{}>) {
+function QueryProvider({ children }: PropsWithChildren<{}>) {
   return (
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );
 }
+
+export default QueryProvider;
