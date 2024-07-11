@@ -21,3 +21,11 @@ import { VectorDoc } from "@datastax/astra-db-ts";
     $vectorize: string
 
   }
+
+
+  interface Task {
+    id: number;
+    title: string;
+    completed: boolean;
+    
+  }
