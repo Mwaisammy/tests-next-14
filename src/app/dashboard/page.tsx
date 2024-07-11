@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import React, { useTransition } from "react";
-import { generate } from "../../../actions";
+// import { generate } from "../../../actions";
 import { useRouter } from "next/navigation";
 
 function DashboardPage() {
@@ -11,14 +11,13 @@ function DashboardPage() {
 
   const onClick = () => {
     // console.log("Generate Data");
-
-    startTransition(() => {
-      generate().then((data) => {
-        if (data) {
-          router.push(`/dashboard/${data.id}`);
-        }
-      });
-    });
+    // startTransition(() => {
+    //   generate().then((data) => {
+    //     if (data) {
+    //       router.push(`/dashboard/${data.id}`);
+    //     }
+    //   });
+    // });
   };
   return (
     <div className="flex items-center justify-center h-screen">
