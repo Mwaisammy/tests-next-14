@@ -1,37 +1,38 @@
-// "use client";
-import ReactHookForm from "@/components/react-hook-form";
-import { useProductStore } from "@/hooks/use-product-store";
-import { redis } from "@/lib/redis";
+"use client";
 
-async function Home() {
-  const id = "826131ba-1944-462d-ab34-b3822912854a";
+import CheckoutPage from "@/components/checkout-page";
+import { convertToSubcurrency } from "@/lib/convertToSubcurrency";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 
-  const data = await redis.get(`key-${id}`);
-  console.log(data);
-  // const { count, addCount, removeCount } = useProductStore();
+if (process.env.NEXT_PUBLIC_STRIPE_KEY === undefined) {
+  throw new Error("NEXT_PUBLIC_STRIPE_PUBLIC_KEY is not defined");
+}
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY);
+
+export default function Home() {
+  const amount = 49.99;
+
   return (
-    <div>
-      <ReactHookForm />
-    </div>
-    // <div className="flex items-center justify-center pt-54">
-    //   {/* <p>Home Page</p> */}
-    //   <div className="flex items-center gap-3">
-    //     <h1 className="font-bold">{count}</h1>
-    //     <button
-    //       onClick={addCount}
-    //       className="p-5 text-white bg-green-400 rounded-sm "
-    //     >
-    //       Increase
-    //     </button>
-    //     <button
-    //       onClick={removeCount}
-    //       className="p-5 text-white bg-rose-400 rounded-sm"
-    //     >
-    //       Decrease
-    //     </button>
-    //   </div>
-    // </div>
+    <main className="max-w-6xl mx-auto p-10 text-white text-center border m-10 rounded-md bg-gradient-to-tr from-blue-500 to-purple-500">
+      <div className="mb-10">
+        <h1 className="text-4xl font-extrabold mb-2">Sonny</h1>
+        <h2 className="text-2xl">
+          has requested
+          <span className="font-bold"> ${amount}</span>
+        </h2>
+      </div>
+
+      <Elements
+        stripe={stripePromise}
+        options={{
+          mode: "payment",
+          amount: convertToSubcurrency(amount),
+          currency: "usd",
+        }}
+      >
+        <CheckoutPage amount={amount} />
+      </Elements>
+    </main>
   );
 }
-
-export default Home;
